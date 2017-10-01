@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <!--通用色-->
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="blackColor">#000000</color>
+    <color name="grayTextColor">#494949</color>
+    <color name="transparentColor">#0000</color>
+    <color name="transparentColor70">#B3000000</color>
+
+
+    <color name="btn_normal">#00ACFF</color>
+    <color name="btn_pressed">#00A1DB</color>
+    <color name="inActive">#ABADBB</color>
+</resources>
