@@ -7,4 +7,5 @@ import com.jiayang.imdemo.v.base.IBaseView;
  */
 
 public interface IloginActivityView extends IBaseView {
+    void fillData(String userName, String userPwd, boolean isSuccess, String msg);
 }

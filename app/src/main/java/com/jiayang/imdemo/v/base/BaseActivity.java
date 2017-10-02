@@ -14,10 +14,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 
+import com.jiayang.imdemo.common.Constants;
 import com.jiayang.imdemo.common.IMApp;
 import com.jiayang.imdemo.m.component.ApiComponent;
 import com.jiayang.imdemo.p.base.BasePresenter;
 import com.jiayang.imdemo.utils.CommonUtil;
+import com.jiayang.imdemo.utils.PreferenceTool;
 
 import javax.inject.Inject;
 
@@ -109,6 +111,22 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
             window.setStatusBarColor(Color.TRANSPARENT);
 //            window.setNavigationBarColor(Color.TRANSPARENT);
         }
+    }
+
+    public void saveUserInfo(String userName ,String userPwd) {
+        PreferenceTool.putString(Constants.SP_Info.SP_USER_NAME, userName);
+        PreferenceTool.commit();
+        PreferenceTool.putString(Constants.SP_Info.SP_USER_PWD, userPwd);
+        PreferenceTool.commit();
+    }
+
+    public String getUserName() {
+        String userName = PreferenceTool.getString(Constants.SP_Info.SP_USER_NAME, "");
+        return userName;
+    }
+    public String getUserPwd() {
+        String userPwd = PreferenceTool.getString(Constants.SP_Info.SP_USER_PWD, "");
+        return userPwd;
     }
 
 }

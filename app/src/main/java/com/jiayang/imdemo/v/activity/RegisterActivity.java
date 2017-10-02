@@ -93,10 +93,7 @@ public class RegisterActivity extends BaseActivity<RegisterActivityPst> implemen
         dismissDialog();
         if (isSuccess) {
 
-            PreferenceTool.putString(Constants.SP_Info.SP_USER_NAME, userName);
-            PreferenceTool.commit();
-            PreferenceTool.putString(Constants.SP_Info.SP_USER_PWD, userPwd);
-            PreferenceTool.commit();
+            saveUserInfo(userName, userPwd);
             ToastUtils.initToast("注册成功");
 
             CommonUtil.hideSoftKeyboard((Activity)context);

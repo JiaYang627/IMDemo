@@ -7,7 +7,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 /**
- *
+ * 子、主线程Utils
  */
 
 public class ThreadUtils {

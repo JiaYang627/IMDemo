@@ -50,7 +50,16 @@ public class SplashActivity extends BaseActivity<SplashActivityPst> implements I
     @Override
     public void fillData(boolean isLogin) {
         if (isLogin) {
-            mPresenter.goToMain();
+            ObjectAnimator animator = ObjectAnimator.ofFloat(mIvSplash, "alpha", 1, 0)
+                    .setDuration(SplashDuration);
+            animator.start();
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mPresenter.goToMain();
+                }
+            });
         } else {
             ObjectAnimator animator = ObjectAnimator.ofFloat(mIvSplash, "alpha", 1, 0)
                     .setDuration(SplashDuration);

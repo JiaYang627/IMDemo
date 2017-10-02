@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_add_friend"
+        android:title="添加好友"
+          android:icon="@mipmap/add_friend_pressed"
+        ></item>
+    <item android:id="@+id/menu_scan"
+          android:title="分享好友"
+          android:icon="@mipmap/scan_pressed"
+        ></item>
+    <item android:id="@+id/menu_about"
+          android:title="关于我们"
+          android:icon="@mipmap/about"
+        ></item>
+</menu>
