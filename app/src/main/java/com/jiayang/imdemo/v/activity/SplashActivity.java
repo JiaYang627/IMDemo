@@ -27,7 +27,7 @@ import butterknife.BindView;
 public class SplashActivity extends BaseActivity<SplashActivityPst> implements IsplashActivityView {
     @BindView(R.id.iv_splash)
     ImageView mIvSplash;
-    private long SplashDuration = 2000;
+    private long SplashDuration = 4000;
 
     @Override
     protected void inject(ApiComponent apiComponent) {

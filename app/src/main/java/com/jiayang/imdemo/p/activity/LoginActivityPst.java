@@ -2,6 +2,7 @@ package com.jiayang.imdemo.p.activity;
 
 import com.hyphenate.EMCallBack;
 import com.hyphenate.chat.EMClient;
+import com.jiayang.imdemo.m.listener.CallBackListener;
 import com.jiayang.imdemo.m.rxhelper.ErrorListener;
 import com.jiayang.imdemo.m.service.IMService;
 import com.jiayang.imdemo.p.base.BasePresenter;
@@ -41,30 +42,17 @@ public class LoginActivityPst extends BasePresenter<IloginActivityView> {
      */
     public void goToLogin(final String userName, final String userPwd) {
         // 环信目前(3.5.X)的所有回调都是在子线程中。
-        EMClient.getInstance().login(userName, userPwd, new EMCallBack() {
+
+
+        EMClient.getInstance().login(userName, userPwd, new CallBackListener() {
             @Override
-            public void onSuccess() {
-                ThreadUtils.runOnMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.fillData(userName, userPwd, true, null);
-                    }
-                });
+            public void onMainSuccess() {
+                mView.fillData(userName, userPwd, true, null);
             }
 
             @Override
-            public void onError(int i, final String s) {
-                ThreadUtils.runOnMainThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mView.fillData(userName, userPwd, false, s);
-                    }
-                });
-            }
-
-            @Override
-            public void onProgress(int i, String s) {
-
+            public void onMainError(int i, String s) {
+                mView.fillData(userName, userPwd, false, s);
             }
         });
     }

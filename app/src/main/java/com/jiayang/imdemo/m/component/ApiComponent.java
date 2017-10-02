@@ -7,6 +7,9 @@ import com.jiayang.imdemo.v.activity.LoginActivity;
 import com.jiayang.imdemo.v.activity.MainActivity;
 import com.jiayang.imdemo.v.activity.RegisterActivity;
 import com.jiayang.imdemo.v.activity.SplashActivity;
+import com.jiayang.imdemo.v.fragment.ContactFragment;
+import com.jiayang.imdemo.v.fragment.ConversationFragment;
+import com.jiayang.imdemo.v.fragment.PluginFragment;
 
 import javax.inject.Singleton;
 
@@ -26,4 +29,10 @@ public interface ApiComponent {
     void inject(LoginActivity activity);
 
     void inject(RegisterActivity activity);
+
+    void inject(ConversationFragment fragment);
+
+    void inject(ContactFragment fragment);
+
+    void inject(PluginFragment fragment);
 }
