@@ -2,8 +2,13 @@ package com.jiayang.imdemo.v.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.jiayang.imdemo.R;
@@ -37,7 +42,7 @@ public class SplashActivity extends BaseActivity<SplashActivityPst> implements I
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setStatusBar();
         // 判断是否已经登录
         mPresenter.checkedLogin();
     }
@@ -47,7 +52,7 @@ public class SplashActivity extends BaseActivity<SplashActivityPst> implements I
         if (isLogin) {
             mPresenter.goToMain();
         } else {
-            ObjectAnimator animator = ObjectAnimator.ofFloat(mIvSplash , "alpha" , 1 , 0)
+            ObjectAnimator animator = ObjectAnimator.ofFloat(mIvSplash, "alpha", 1, 0)
                     .setDuration(SplashDuration);
             animator.start();
             animator.addListener(new AnimatorListenerAdapter() {
