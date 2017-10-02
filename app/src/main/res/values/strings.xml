@@ -8,4 +8,7 @@
     <string name="request_time_out">网络请求超时，请重试</string>
     <string name="network_hint">您的网络不给力，请检查网络设置</string>
     <string name="fail_to_connected">网络连接失败</string>
+    <string name="main_conversation">消息</string>
+    <string name="main_contact">联系人</string>
+    <string name="main_plugin">动态</string>
 </resources>
