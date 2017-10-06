@@ -8,6 +8,7 @@ import android.util.Log;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.jiayang.imdemo.BuildConfig;
+import com.jiayang.imdemo.db.DBUtils;
 import com.jiayang.imdemo.m.component.ApiComponent;
 import com.jiayang.imdemo.m.component.AppComponent;
 import com.jiayang.imdemo.m.component.DaggerApiComponent;
@@ -45,6 +46,8 @@ public class IMAppDeletage {
         initBmob();                          // 初始化Bmob
         ToastUtils.init(application);        // 吐司初始化
         PreferenceTool.init(application);    // Preference参数
+        DBUtils.initDB(application);         // DBHelper初始化
+
     }
 
     private void initInjcet() {

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.jiayang.imdemo.R;
 import com.jiayang.imdemo.m.component.ApiComponent;
 import com.jiayang.imdemo.p.activity.LoginActivityPst;
+import com.jiayang.imdemo.utils.CommonUtil;
 import com.jiayang.imdemo.utils.StringUtils;
 import com.jiayang.imdemo.utils.ToastUtils;
 import com.jiayang.imdemo.v.base.BaseActivity;
@@ -114,6 +115,7 @@ public class LoginActivity extends BaseActivity<LoginActivityPst> implements Ilo
 
     @Override
     public void fillData(String userName, String userPwd, boolean isSuccess, String msg) {
+        CommonUtil.hideSoftKeyboard(this);
         if (isSuccess) {
             // 成功了
             saveUserInfo(userName , userPwd);

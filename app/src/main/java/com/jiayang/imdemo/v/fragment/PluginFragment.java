@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.jiayang.imdemo.R;
 import com.jiayang.imdemo.m.component.ApiComponent;
 import com.jiayang.imdemo.p.fragment.PluginFragmentPst;
+import com.jiayang.imdemo.utils.ToastUtils;
 import com.jiayang.imdemo.v.base.BaseFragment;
 import com.jiayang.imdemo.v.iview.IpluginFragmentView;
 
@@ -61,9 +62,9 @@ public class PluginFragment extends BaseFragment<PluginFragmentPst> implements I
     public void fillData(String currentUser, boolean isSuccess, String msg) {
         dismissDialog();
         if (isSuccess) {
-
+            mPresenter.goToLogin();
         } else {
-
+            ToastUtils.initToast(msg);
         }
     }
 }

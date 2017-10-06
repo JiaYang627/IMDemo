@@ -7,6 +7,7 @@ import com.jiayang.imdemo.m.rxhelper.ErrorListener;
 import com.jiayang.imdemo.m.service.IMService;
 import com.jiayang.imdemo.p.base.BasePresenter;
 import com.jiayang.imdemo.utils.ThreadUtils;
+import com.jiayang.imdemo.v.fragment.PluginFragment;
 import com.jiayang.imdemo.v.iview.IpluginFragmentView;
 
 import javax.inject.Inject;
@@ -34,7 +35,7 @@ public class PluginFragmentPst extends BasePresenter<IpluginFragmentView> {
     public void goLogout() {
 
         /**
-         *  true 退出后不在接收官方推送的消息。
+         *  true: 解除绑定。退出后不在接收官方推送的消息。
          */
         EMClient.getInstance().logout(true, new CallBackListener() {
             @Override
@@ -47,5 +48,9 @@ public class PluginFragmentPst extends BasePresenter<IpluginFragmentView> {
                 mView.fillData(EMClient.getInstance().getCurrentUser(),false ,s);
             }
         });
+    }
+
+    public void goToLogin() {
+        mIMNavigate.goToLogin(context);
     }
 }

@@ -4,9 +4,12 @@
              android:layout_height="match_parent"
              >
 
-    <TextView
-        android:text="This is contactFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+
+    <com.jiayang.imdemo.widget.ContactLayout
+        android:id="@+id/contact_frg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.jiayang.imdemo.widget.ContactLayout>
 
 </FrameLayout>
