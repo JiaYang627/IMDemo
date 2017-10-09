@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 作者： itheima
- * 时间：2016-10-17 15:53
- * 网址：http://www.itheima.com
+ *
  */
 
 public class DBUtils {

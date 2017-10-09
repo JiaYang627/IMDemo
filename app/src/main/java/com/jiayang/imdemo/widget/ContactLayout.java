@@ -3,6 +3,7 @@ package com.jiayang.imdemo.widget;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -18,6 +19,11 @@ import com.jiayang.imdemo.R;
  */
 
 public class ContactLayout extends RelativeLayout {
+
+    private RecyclerView mContactRecyclerView;
+    private TextView mContactTextView;
+    private SlideBar mContactSlideBar;
+
     public ContactLayout(Context context) {
         this(context,null);
     }
@@ -25,9 +31,9 @@ public class ContactLayout extends RelativeLayout {
     public ContactLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.item_contact, this, true);
-        RecyclerView contactRecyclerView = (RecyclerView) findViewById(R.id.contact_recyclerView);
-        TextView contactTextView = (TextView) findViewById(R.id.contact_textView);
-        SlideBar contactSlideBar = (SlideBar) findViewById(R.id.contact_slideBar);
+        mContactRecyclerView = (RecyclerView) findViewById(R.id.contact_recyclerView);
+        mContactTextView = (TextView) findViewById(R.id.contact_textView);
+        mContactSlideBar = (SlideBar) findViewById(R.id.contact_slideBar);
 
     }
 
@@ -38,5 +44,10 @@ public class ContactLayout extends RelativeLayout {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ContactLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    public void setAdapter(RecyclerView.Adapter adapter) {
+        mContactRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mContactRecyclerView.setAdapter(adapter);
     }
 }
