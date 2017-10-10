@@ -15,7 +15,7 @@ import java.util.List;
  * Created by 张 奎 on 2017-10-09 10:55.
  */
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> implements IContactAdapter{
     private List<String> data;
 
     public ContactAdapter(List<String> data) {
@@ -52,6 +52,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public int getItemCount() {
         return data == null ? 0 : data.size();
+    }
+
+    @Override
+    public List<String> getData() {
+        return data;
+
     }
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
