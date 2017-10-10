@@ -50,6 +50,12 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
 
         // 开子线程去环信后台获取当前用户的联系人。
 
+        goToGetContacts(currentUser);
+
+
+    }
+
+    private void goToGetContacts(final String currentUser) {
         ThreadUtils.runOnSubThread(new Runnable() {
             @Override
             public void run() {
@@ -86,7 +92,9 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
                 }
             }
         });
+    }
 
-
+    public void goToRefresh() {
+        goToGetContacts(EMClient.getInstance().getCurrentUser());
     }
 }

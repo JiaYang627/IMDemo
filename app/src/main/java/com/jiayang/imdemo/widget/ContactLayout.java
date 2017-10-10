@@ -3,6 +3,7 @@ package com.jiayang.imdemo.widget;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -23,6 +24,7 @@ public class ContactLayout extends RelativeLayout {
     private RecyclerView mContactRecyclerView;
     private TextView mContactTextView;
     private SlideBar mContactSlideBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public ContactLayout(Context context) {
         this(context,null);
@@ -34,6 +36,8 @@ public class ContactLayout extends RelativeLayout {
         mContactRecyclerView = (RecyclerView) findViewById(R.id.contact_recyclerView);
         mContactTextView = (TextView) findViewById(R.id.contact_textView);
         mContactSlideBar = (SlideBar) findViewById(R.id.contact_slideBar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.contact_swipeRefreshLayout);
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
     }
 
@@ -49,5 +53,12 @@ public class ContactLayout extends RelativeLayout {
     public void setAdapter(RecyclerView.Adapter adapter) {
         mContactRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mContactRecyclerView.setAdapter(adapter);
+    }
+    public void setSwipeRefreshOnRefresh(SwipeRefreshLayout.OnRefreshListener listener) {
+        mSwipeRefreshLayout.setOnRefreshListener(listener);
+    }
+
+    public void setSwipeRefreshing(boolean refreshing) {
+        mSwipeRefreshLayout.setRefreshing(refreshing);
     }
 }

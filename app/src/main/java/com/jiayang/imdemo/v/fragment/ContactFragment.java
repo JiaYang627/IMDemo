@@ -2,6 +2,7 @@ package com.jiayang.imdemo.v.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import butterknife.Unbinder;
  * Created by 张 奎 on 2017-10-02 14:50.
  */
 
-public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView {
+public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.contactLayout)
     ContactLayout mContactLayout;
@@ -43,7 +44,7 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
         View view = getActivity().getLayoutInflater().inflate(R.layout.fragment_contact, null);
         mUnbinder = ButterKnife.bind(this, view);
 
-
+        mContactLayout.setSwipeRefreshOnRefresh(this);
         return view;
     }
 
@@ -71,5 +72,12 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
         } else {
             ToastUtils.initToast(msg);
         }
+
+        mContactLayout.setSwipeRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.goToRefresh();
     }
 }
