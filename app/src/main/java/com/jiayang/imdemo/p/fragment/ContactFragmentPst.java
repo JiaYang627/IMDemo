@@ -97,4 +97,25 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
     public void goToRefresh() {
         goToGetContacts(EMClient.getInstance().getCurrentUser());
     }
+
+    public void goToDelect(final String contact) {
+        ThreadUtils.runOnSubThread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    EMClient.getInstance().contactManager().deleteContact(contact);
+                    ThreadUtils.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mView.delectContanct(true, null);
+                        }
+                    });
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                    mView.delectContanct(false, e.toString());
+
+                }
+            }
+        });
+    }
 }

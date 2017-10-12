@@ -2,6 +2,8 @@ package com.jiayang.imdemo.v.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BaseTransientBottomBar;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +33,7 @@ import butterknife.Unbinder;
  * Created by 张 奎 on 2017-10-02 14:50.
  */
 
-public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView, SwipeRefreshLayout.OnRefreshListener {
+public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView, SwipeRefreshLayout.OnRefreshListener, ContactAdapter.onItemLongClickListener {
 
     @BindView(R.id.contactLayout)
     ContactLayout mContactLayout;
@@ -73,6 +75,7 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
             mContactAdapter = new ContactAdapter(contactsList);
         }
         mContactLayout.setAdapter(mContactAdapter);
+        mContactAdapter.setOnItemLongClickListener(this);
     }
 
     @Override
@@ -90,7 +93,27 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
     }
 
     @Override
+    public void delectContanct(boolean isSuccess, String msg) {
+        if (isSuccess) {
+            ToastUtils.initToast("删除成功");
+        } else {
+            ToastUtils.initToast("删除失败:" + msg);
+        }
+    }
+
+    @Override
     public void onRefresh() {
         mPresenter.goToRefresh();
+    }
+
+    @Override
+    public void onItemLongClick(final String contact, int position) {
+        Snackbar.make(mContactLayout, "确定删除好友" + contact + "嘛？", Snackbar.LENGTH_LONG)
+                .setAction("确定", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.goToDelect(contact);
+                    }
+                }).show();
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * Created by 张 奎 on 2017-10-09 10:55.
  */
 
-public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> implements IContactAdapter{
+public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> implements IContactAdapter {
     private List<String> data;
 
     public ContactAdapter(List<String> data) {
@@ -30,11 +30,24 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     }
 
     @Override
-    public void onBindViewHolder(ContactViewHolder holder, int position) {
-        String contact = data.get(position);
+    public void onBindViewHolder(ContactViewHolder holder, final int position) {
+        final String contact = data.get(position);
         holder.mTvUsername.setText(contact);
         String initial = StringUtils.getInitial(contact);
         holder.mTvSection.setText(initial);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                if (mOnItemLongClickListener != null) {
+                    mOnItemLongClickListener.onItemLongClick(contact, position);
+                }
+
+                return true;
+
+            }
+        });
+
         if (position == 0) {
             holder.mTvSection.setVisibility(View.VISIBLE);
         } else {
@@ -59,6 +72,17 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         return data;
 
     }
+
+    private onItemLongClickListener mOnItemLongClickListener;
+
+    public interface onItemLongClickListener {
+        void onItemLongClick(String contact, int position);
+    }
+
+    public void setOnItemLongClickListener(onItemLongClickListener mOnItemLongClickListener) {
+        this.mOnItemLongClickListener = mOnItemLongClickListener;
+    }
+
 
     class ContactViewHolder extends RecyclerView.ViewHolder {
 

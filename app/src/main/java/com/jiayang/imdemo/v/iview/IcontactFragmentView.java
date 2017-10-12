@@ -12,4 +12,6 @@ public interface IcontactFragmentView extends IBaseView {
     void fillData(List<String> contactsList);
 
     void upDateContacts(boolean isSuccess, String msg);
+
+    void delectContanct(boolean isSuccess, String msg);
 }
