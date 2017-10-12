@@ -5,6 +5,7 @@ import android.app.Application;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
+import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
 import com.jiayang.imdemo.BuildConfig;
@@ -17,6 +18,9 @@ import com.jiayang.imdemo.m.model.ApiModule;
 import com.jiayang.imdemo.m.model.AppModule;
 import com.jiayang.imdemo.utils.PreferenceTool;
 import com.jiayang.imdemo.utils.ToastUtils;
+import com.jiayang.imdemo.v.event.OnContactUpdateEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.Iterator;
 import java.util.List;
@@ -90,6 +94,39 @@ public class IMAppDeletage {
         EMClient.getInstance().init(application, options);
         //在做打包混淆时，关闭debug模式，避免消耗不必要的资源
         EMClient.getInstance().setDebugMode(BuildConfig.DEBUG);
+
+        initContactListener();
+    }
+
+    private void initContactListener() {
+        EMClient.getInstance().contactManager().setContactListener(new EMContactListener() {
+            @Override
+            public void onContactAdded(String s) {
+                // 好友请求同意
+                EventBus.getDefault().post(new OnContactUpdateEvent(s ,true));
+            }
+
+            @Override
+            public void onContactDeleted(String s) {
+                //  被删除
+                EventBus.getDefault().post(new OnContactUpdateEvent(s ,false));
+            }
+
+            @Override
+            public void onContactInvited(String s, String s1) {
+                // 收到邀请
+            }
+
+            @Override
+            public void onContactAgreed(String s) {
+                // 好友请求被同意
+            }
+
+            @Override
+            public void onContactRefused(String s) {
+                // 好友请求被拒绝
+            }
+        });
     }
 
     private String getAppName(int pID) {
@@ -122,7 +159,7 @@ public class IMAppDeletage {
         return new AppModule(application);
     }
 
-    public ApiComponent getApiComponent(){
+    public ApiComponent getApiComponent() {
         return apiComponent;
     }
 }

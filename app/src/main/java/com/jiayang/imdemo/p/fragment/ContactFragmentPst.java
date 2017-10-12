@@ -34,8 +34,8 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
 
 
     @Override
-    public void onTakeView() {
-        super.onTakeView();
+    public void onOnceTakeView() {
+        super.onOnceTakeView();
         /**
          *  1.先访问本地缓存的联系人。
          *  2.开子线程去环信后台获取当前用户的联系人。

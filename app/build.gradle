@@ -69,4 +69,6 @@ dependencies {
     //BottomNavigate
     compile 'com.ashokvarma.android:bottom-navigation-bar:1.3.1'
     compile 'com.android.support:cardview-v7:25.3.1'
+    //EventBus
+    compile 'org.greenrobot:eventbus:3.0.0'
 }

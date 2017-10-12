@@ -13,8 +13,13 @@ import com.jiayang.imdemo.p.fragment.ContactFragmentPst;
 import com.jiayang.imdemo.utils.ToastUtils;
 import com.jiayang.imdemo.v.adapter.ContactAdapter;
 import com.jiayang.imdemo.v.base.BaseFragment;
+import com.jiayang.imdemo.v.event.OnContactUpdateEvent;
 import com.jiayang.imdemo.v.iview.IcontactFragmentView;
 import com.jiayang.imdemo.widget.ContactLayout;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
@@ -45,6 +50,8 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
         mUnbinder = ButterKnife.bind(this, view);
 
         mContactLayout.setSwipeRefreshOnRefresh(this);
+
+        EventBus.getDefault().register(this);
         return view;
     }
 
@@ -52,6 +59,12 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
     public void onDestroyView() {
         super.onDestroyView();
         mUnbinder.unbind();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onContactEvent(OnContactUpdateEvent onContactUpdateEvent) {
+        mPresenter.goToRefresh();
     }
 
     @Override
