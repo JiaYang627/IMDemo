@@ -20,4 +20,8 @@ public class MainActivityPst extends BasePresenter<ImainActivityView> {
         super(errorListener);
         mIMService = imService;
     }
+
+    public void goToAddFriend() {
+        mIMNavigate.goToAddFriend(context);
+    }
 }

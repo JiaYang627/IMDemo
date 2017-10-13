@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import com.jiayang.imdemo.v.activity.AddFriendActivity;
 import com.jiayang.imdemo.v.activity.LoginActivity;
 import com.jiayang.imdemo.v.activity.MainActivity;
 import com.jiayang.imdemo.v.activity.RegisterActivity;
@@ -29,5 +30,10 @@ public class IMNavigate {
         Intent intent = new Intent(context, RegisterActivity.class);
         context.startActivity(intent);
 
+    }
+
+    public void goToAddFriend(Context context) {
+        Intent intent = new Intent(context, AddFriendActivity.class);
+        context.startActivity(intent);
     }
 }

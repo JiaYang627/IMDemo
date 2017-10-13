@@ -130,7 +130,7 @@ public class MainActivity extends BaseActivity<MainActivityPst> implements Imain
         switch (item.getItemId()) {
             case R.id.menu_add_friend:
                 ToastUtils.initToast("点击了 添加好友按钮");
-                //TODO 跳转添加好友
+                mPresenter.goToAddFriend();
                 break;
             case R.id.menu_scan:
                 ToastUtils.initToast("点击了 扫一扫按钮");

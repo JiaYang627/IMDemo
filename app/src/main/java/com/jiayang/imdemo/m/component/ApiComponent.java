@@ -3,6 +3,7 @@ package com.jiayang.imdemo.m.component;
 
 
 import com.jiayang.imdemo.m.model.ApiModule;
+import com.jiayang.imdemo.v.activity.AddFriendActivity;
 import com.jiayang.imdemo.v.activity.LoginActivity;
 import com.jiayang.imdemo.v.activity.MainActivity;
 import com.jiayang.imdemo.v.activity.RegisterActivity;
@@ -35,4 +36,6 @@ public interface ApiComponent {
     void inject(ContactFragment fragment);
 
     void inject(PluginFragment fragment);
+
+    void inject(AddFriendActivity activity);
 }

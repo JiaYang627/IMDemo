@@ -56,8 +56,14 @@
             android:name=".v.activity.LoginActivity"
             android:screenOrientation="portrait"/>
 
+        <!-- 注册界面 -->
         <activity
             android:name=".v.activity.RegisterActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- 添加好友界面 -->
+        <activity
+            android:name=".v.activity.AddFriendActivity"
             android:screenOrientation="portrait"/>
 
         <!-- 设置环信应用的AppKey -->
