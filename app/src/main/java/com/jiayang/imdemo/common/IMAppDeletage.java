@@ -8,6 +8,7 @@ import android.util.Log;
 import com.hyphenate.EMContactListener;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.exceptions.HyphenateException;
 import com.jiayang.imdemo.BuildConfig;
 import com.jiayang.imdemo.db.DBUtils;
 import com.jiayang.imdemo.m.component.ApiComponent;
@@ -113,8 +114,14 @@ public class IMAppDeletage {
             }
 
             @Override
-            public void onContactInvited(String s, String s1) {
+            public void onContactInvited(String username, String reason) {
                 // 收到邀请
+                //同意或者拒绝
+                try {
+                    EMClient.getInstance().contactManager().acceptInvitation(username);
+                } catch (HyphenateException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
