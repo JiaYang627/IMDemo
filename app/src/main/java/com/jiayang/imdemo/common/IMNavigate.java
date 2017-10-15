@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.jiayang.imdemo.v.activity.AddFriendActivity;
+import com.jiayang.imdemo.v.activity.ChatActivity;
 import com.jiayang.imdemo.v.activity.LoginActivity;
 import com.jiayang.imdemo.v.activity.MainActivity;
 import com.jiayang.imdemo.v.activity.RegisterActivity;
@@ -17,13 +18,13 @@ public class IMNavigate {
     public void goToMain(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         context.startActivity(intent);
-        ((Activity)context).finish();
+        ((Activity) context).finish();
     }
 
     public void goToLogin(Context context) {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
-        ((Activity)context).finish();
+        ((Activity) context).finish();
     }
 
     public void goToRegister(Context context) {
@@ -34,6 +35,12 @@ public class IMNavigate {
 
     public void goToAddFriend(Context context) {
         Intent intent = new Intent(context, AddFriendActivity.class);
+        context.startActivity(intent);
+    }
+
+    public void goToChat(Context context, String contact) {
+        Intent intent = new Intent(context, ChatActivity.class);
+        intent.putExtra("username", contact);
         context.startActivity(intent);
     }
 }

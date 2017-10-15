@@ -66,6 +66,11 @@
             android:name=".v.activity.AddFriendActivity"
             android:screenOrientation="portrait"/>
 
+        <!-- 聊天页面 -->
+        <activity
+            android:name=".v.activity.ChatActivity"
+            android:screenOrientation="portrait"/>
+
         <!-- 设置环信应用的AppKey -->
         <meta-data
             android:name="EASEMOB_APPKEY"

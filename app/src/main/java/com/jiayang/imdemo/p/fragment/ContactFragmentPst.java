@@ -118,4 +118,8 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
             }
         });
     }
+
+    public void goToChat(String contact) {
+        mIMNavigate.goToChat(context, contact);
+    }
 }

@@ -2,7 +2,6 @@ package com.jiayang.imdemo.v.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.BaseTransientBottomBar;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ import butterknife.Unbinder;
  * Created by 张 奎 on 2017-10-02 14:50.
  */
 
-public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView, SwipeRefreshLayout.OnRefreshListener, ContactAdapter.onItemLongClickListener {
+public class ContactFragment extends BaseFragment<ContactFragmentPst> implements IcontactFragmentView, SwipeRefreshLayout.OnRefreshListener, ContactAdapter.onItemClickListener {
 
     @BindView(R.id.contactLayout)
     ContactLayout mContactLayout;
@@ -106,6 +105,11 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
         mPresenter.goToRefresh();
     }
 
+    /**
+     *  Item长按回调
+     * @param contact
+     * @param position
+     */
     @Override
     public void onItemLongClick(final String contact, int position) {
         Snackbar.make(mContactLayout, "确定删除好友" + contact + "嘛？", Snackbar.LENGTH_LONG)
@@ -115,5 +119,15 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
                         mPresenter.goToDelect(contact);
                     }
                 }).show();
+    }
+
+    /**
+     *  Item点击回调
+     * @param contact
+     * @param position
+     */
+    @Override
+    public void onItemClick(String contact, int position) {
+        mPresenter.goToChat(contact);
     }
 }

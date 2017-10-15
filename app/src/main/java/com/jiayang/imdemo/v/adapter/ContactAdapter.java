@@ -48,6 +48,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             }
         });
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemLongClickListener != null) {
+                    mOnItemLongClickListener.onItemClick(contact, position);
+                }
+            }
+        });
+
         if (position == 0) {
             holder.mTvSection.setVisibility(View.VISIBLE);
         } else {
@@ -73,13 +82,15 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     }
 
-    private onItemLongClickListener mOnItemLongClickListener;
+    private onItemClickListener mOnItemLongClickListener;
 
-    public interface onItemLongClickListener {
+    public interface onItemClickListener {
         void onItemLongClick(String contact, int position);
+
+        void onItemClick(String contact, int position);
     }
 
-    public void setOnItemLongClickListener(onItemLongClickListener mOnItemLongClickListener) {
+    public void setOnItemLongClickListener(onItemClickListener mOnItemLongClickListener) {
         this.mOnItemLongClickListener = mOnItemLongClickListener;
     }
 
