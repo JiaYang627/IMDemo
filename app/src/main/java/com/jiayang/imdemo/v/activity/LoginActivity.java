@@ -115,6 +115,7 @@ public class LoginActivity extends BaseActivity<LoginActivityPst> implements Ilo
 
     @Override
     public void fillData(String userName, String userPwd, boolean isSuccess, String msg) {
+        dismissDialog();
         CommonUtil.hideSoftKeyboard(this);
         if (isSuccess) {
             // 成功了

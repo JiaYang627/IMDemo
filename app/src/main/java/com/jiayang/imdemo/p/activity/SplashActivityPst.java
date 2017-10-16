@@ -25,8 +25,8 @@ public class SplashActivityPst extends BasePresenter<IsplashActivityView> {
 
     public void checkedLogin() {
 
-        // isLoggedInBefore 之前是否登录  isLoggedInBefore 是否已经连接上
-        if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isLoggedInBefore()) {
+        // isLoggedInBefore 之前是否登录  isConnected 是否已经连接上
+        if (EMClient.getInstance().isLoggedInBefore() && EMClient.getInstance().isConnected()) {
             // 已经登录了
             mView.fillData(true);
         } else {
