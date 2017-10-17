@@ -55,4 +55,8 @@ public class ConversationFragmentPst extends BasePresenter<IconversationFragment
         });
         mView.onInitConversation(mEMConversationList);
     }
+
+    public void goToChat(String userName) {
+        mIMNavigate.goToChat(context ,userName);
+    }
 }

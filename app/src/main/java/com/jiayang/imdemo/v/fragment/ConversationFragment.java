@@ -33,7 +33,7 @@ import butterknife.Unbinder;
  * Created by 张 奎 on 2017-10-02 14:46.
  */
 
-public class ConversationFragment extends BaseFragment<ConversationFragmentPst> implements IconversationFragmentView {
+public class ConversationFragment extends BaseFragment<ConversationFragmentPst> implements IconversationFragmentView, ConversationAdapter.onItemClickListener {
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -64,14 +64,15 @@ public class ConversationFragment extends BaseFragment<ConversationFragmentPst> 
         super.onDestroyView();
         mUnbinder.unbind();
         EventBus.getDefault().unregister(this);
+        mConversationAdapter = null;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        if (mConversationAdapter != null) {
-//            mConversationAdapter.notifyDataSetChanged();
-//        }
+        if (mConversationAdapter != null) {
+            mConversationAdapter.notifyDataSetChanged();
+        }
     }
 
 
@@ -84,20 +85,22 @@ public class ConversationFragment extends BaseFragment<ConversationFragmentPst> 
     @Override
     public void onInitConversation(List<EMConversation> emConversationList) {
 
-//        if (mConversationAdapter == null) {
-//            mConversationAdapter = new ConversationAdapter(emConversationList);
-//            mRecyclerView.setAdapter(mConversationAdapter);
-//        } else {
-//            mConversationAdapter.notifyDataSetChanged();
-//        }
+        if (mConversationAdapter == null) {
+            mConversationAdapter = new ConversationAdapter(emConversationList);
+            mRecyclerView.setAdapter(mConversationAdapter);
+            mConversationAdapter.setOnItemClickListener(this);
+        } else {
+            mConversationAdapter.notifyDataSetChanged();
+        }
 
-        // 不知道是否是环信后台的问题 正常逻辑 上面的写法 后来运行的时候发现列表显示不出来。
-        // 无奈 只有这样写了
-        mConversationAdapter = new ConversationAdapter(emConversationList);
-        mRecyclerView.setAdapter(mConversationAdapter);
     }
 
     @OnClick(R.id.fab)
     public void onViewClicked() {
+    }
+
+    @Override
+    public void onItemClick(EMConversation emConversation) {
+        mPresenter.goToChat(emConversation.getUserName());
     }
 }

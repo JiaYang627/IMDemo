@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.chat.EMMessage;
-import com.hyphenate.chat.EMMessageBody;
 import com.hyphenate.chat.EMTextMessageBody;
 import com.hyphenate.util.DateUtils;
 import com.jiayang.imdemo.R;
@@ -38,7 +37,7 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
     @Override
     public void onBindViewHolder(ConversationViewHolder holder, int position) {
-        EMConversation emConversation = mEMConversationList.get(position);
+        final EMConversation emConversation = mEMConversationList.get(position);
 
         // 聊天对象名字
         String userName = emConversation.getUserName();
@@ -69,8 +68,32 @@ public class ConversationAdapter extends RecyclerView.Adapter<ConversationAdapte
 
         }
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(emConversation);
+                }
+            }
+        });
+
 
     }
+
+
+    private onItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(onItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+
+    }
+
+    public interface onItemClickListener {
+        void onItemClick(EMConversation emConversation);
+    }
+
+
+
 
     @Override
     public int getItemCount() {

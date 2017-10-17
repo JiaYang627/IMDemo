@@ -11,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import com.hyphenate.EMContactListener;
@@ -167,6 +169,7 @@ public class IMAppDeletage {
 
     private void initMessageListener() {
         EMClient.getInstance().chatManager().addMessageListener(new MessageListenerAdapter() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
             @Override
             public void onMessageReceived(List<EMMessage> list) {
                 super.onMessageReceived(list);
@@ -203,6 +206,7 @@ public class IMAppDeletage {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void sendNotification(EMMessage message) {
         EMTextMessageBody messageBody = (EMTextMessageBody) message.getBody();
         NotificationManager notificationManager = (NotificationManager) application.getSystemService(NOTIFICATION_SERVICE);
@@ -217,7 +221,7 @@ public class IMAppDeletage {
 
         Intent[] intents = {mainIntent,chatIntent};
         PendingIntent pendingIntent = PendingIntent.getActivities(application,1,intents,PendingIntent.FLAG_UPDATE_CURRENT) ;
-        @SuppressLint({"NewApi", "LocalSuppress"}) Notification notification = new Notification.Builder(application)
+        Notification notification = new Notification.Builder(application)
                 .setAutoCancel(true) //当点击后自动删除
                 .setSmallIcon(R.mipmap.message) //必须设置
                 .setLargeIcon(BitmapFactory.decodeResource(application.getResources(),R.mipmap.default_avatar))
