@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.jiayang.imdemo.m.component.ApiComponent;
+import com.jiayang.imdemo.v.base.BaseActivity;
 
 /**
  * Created by 张 奎 on 2017-09-30 18:04.
@@ -36,5 +37,14 @@ public class IMApp extends Application {
 
     public ApiComponent getApiComponent(){
         return mImAppDeletage.getApiComponent();
+    }
+
+    public void addActiviy(BaseActivity activity) {
+        mImAppDeletage.addActivity(activity);
+
+    }
+
+    public void removeActivity(BaseActivity activity) {
+        mImAppDeletage.removeActivity(activity);
     }
 }

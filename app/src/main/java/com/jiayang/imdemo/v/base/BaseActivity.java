@@ -1,5 +1,6 @@
 package com.jiayang.imdemo.v.base;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -38,12 +39,14 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
     @Inject
     protected T mPresenter;
     private ProgressDialog mProgressDialog;
+    private IMApp mApplication;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.context = this;
-        inject(((IMApp)getApplication()).getApiComponent());
+        mApplication = (IMApp) getApplication();
+        inject(mApplication.getApiComponent());
         mPresenter.attachView(this);
         setContentView(getLayoutId());
         unbinder = ButterKnife.bind(this);
@@ -52,6 +55,9 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
 
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setCancelable(false);
+
+
+        mApplication.addActiviy(this);
 
     }
 
@@ -77,6 +83,7 @@ public abstract class BaseActivity <T extends BasePresenter> extends AppCompatAc
             mPresenter.detachView();
         }
         unbinder.unbind();
+        mApplication.removeActivity(this);
     }
 
     public void showDialog(String msg) {

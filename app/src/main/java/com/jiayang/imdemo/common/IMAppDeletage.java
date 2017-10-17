@@ -15,7 +15,9 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMContactListener;
+import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.chat.EMOptions;
@@ -31,14 +33,18 @@ import com.jiayang.imdemo.m.component.DaggerAppComponent;
 import com.jiayang.imdemo.m.model.ApiModule;
 import com.jiayang.imdemo.m.model.AppModule;
 import com.jiayang.imdemo.utils.PreferenceTool;
+import com.jiayang.imdemo.utils.ThreadUtils;
 import com.jiayang.imdemo.utils.ToastUtils;
 import com.jiayang.imdemo.v.activity.ChatActivity;
+import com.jiayang.imdemo.v.activity.LoginActivity;
 import com.jiayang.imdemo.v.activity.MainActivity;
 import com.jiayang.imdemo.v.adapter.MessageListenerAdapter;
+import com.jiayang.imdemo.v.base.BaseActivity;
 import com.jiayang.imdemo.v.event.OnContactUpdateEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -61,6 +67,7 @@ public class IMAppDeletage {
     private SoundPool mSoundPool;
     private int mDuanSound;
     private int mYuluSound;
+    private List<BaseActivity> mBaseActivityList = new ArrayList<>();
 
     public IMAppDeletage(Application application) {
         this.application = application;
@@ -75,6 +82,15 @@ public class IMAppDeletage {
         DBUtils.initDB(application);         // DBHelper初始化
 
         initSoundPool();
+    }
+
+    public void addActivity(BaseActivity activity){
+        if (!mBaseActivityList.contains(activity)){
+            mBaseActivityList.add(activity);
+        }
+    }
+    public void removeActivity(BaseActivity activity){
+        mBaseActivityList.remove(activity);
     }
 
     private void initInjcet() {
@@ -122,6 +138,8 @@ public class IMAppDeletage {
         initContactListener();
         // 消息的监听
         initMessageListener();
+        // 连线状态的监听
+        initConnectionListener();
     }
 
     private void initSoundPool() {
@@ -193,6 +211,41 @@ public class IMAppDeletage {
                 }
             }
         });
+    }
+
+    private void initConnectionListener() {
+
+        EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+            @Override
+            public void onConnected() {
+            }
+
+            @Override
+            public void onDisconnected(int i) {
+                if (i== EMError.USER_LOGIN_ANOTHER_DEVICE){
+                    // 显示帐号在其他设备登录
+                    /**
+                     *  将当前任务栈中所有的Activity给清空掉
+                     *  重新打开登录界面
+                     */
+                    for (BaseActivity baseActivity : mBaseActivityList) {
+                        baseActivity.finish();
+                    }
+
+                    Intent intent = new Intent(application, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    application.startActivity(intent);
+                    ThreadUtils.runOnMainThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.initToast("您已在其他设备上登录了，请重新登录。");
+                        }
+                    });
+
+                }
+            }
+        });
+
     }
 
     private boolean isRunningBackground() {
