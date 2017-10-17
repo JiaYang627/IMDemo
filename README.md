@@ -20,17 +20,23 @@
 ## AndroidUI
 
 > 聊天UI图(另外一部手机就不录屏了)
+
+
 ![IMDemoUI-ONE](http://a2.qpic.cn/psb?/V14YlNrL2eQEkW/QNHrnSQgDvhgiHzR2qJD05Cwsm4DrKmZPAPxOkzgFVk!/c/dDQAAAAAAAAA&bo=GgKzAwAAAAACB4s!&rf=viewer_4)
 
 ***
 
 > 账号多端登录
+
+
 ![IMDemo-TWO](http://a1.qpic.cn/psb?/V14YlNrL2eQEkW/TmmLhbGP2q8jsmie.rFDWKAMnQ7uRJgSAaRntaWX*UU!/b/dJYAAAAAAAAA&bo=HAK3AwAAAAACTsA!&rf=viewer_4)
 
 ***
 
 > 联系人 右侧字母自定义控件
+
+
 ![IMDemo-THREE](http://a1.qpic.cn/psb?/V14YlNrL2eQEkW/CHzbM2izRGzp7b.nPcLwj2t*0ywVa*t8UVNDEio6vjg!/b/dLEAAAAAAAAA&bo=GQK3AwAAAAACcPs!&rf=viewer_4)
 
 ***
-* 写在最后：此项目只为再次练习MVP框架。聊天主要依附的是第三方环信。
+* 写在最后：项目写的比较仓促，是利用工作之余时间写的，开始到最后优化将近半月时间。此项目只为再次练习MVP框架，而且聊天主要依附的是第三方环信。
