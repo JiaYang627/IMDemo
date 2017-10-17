@@ -177,7 +177,7 @@ public class IMAppDeletage {
                      * 3. 如果是在后台发出长声音
                      * 4. 如果在前台发出短声音
                      */
-                    if (isRuninBackground()) {
+                    if (isRunningBackground()) {
                         sendNotification(list.get(0));
                         //发出长声音
                         //参数2/3：左右喇叭声音的大小
@@ -192,7 +192,7 @@ public class IMAppDeletage {
         });
     }
 
-    private boolean isRuninBackground() {
+    private boolean isRunningBackground() {
         ActivityManager activityManager = (ActivityManager) application.getSystemService(ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(100);
         ActivityManager.RunningTaskInfo runningTaskInfo = runningTasks.get(0);

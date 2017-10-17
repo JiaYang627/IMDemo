@@ -84,13 +84,17 @@ public class ConversationFragment extends BaseFragment<ConversationFragmentPst> 
     @Override
     public void onInitConversation(List<EMConversation> emConversationList) {
 
-        if (mConversationAdapter == null) {
-            mConversationAdapter = new ConversationAdapter(emConversationList);
-            mRecyclerView.setAdapter(mConversationAdapter);
-        } else {
-            mConversationAdapter.notifyDataSetChanged();
-        }
+//        if (mConversationAdapter == null) {
+//            mConversationAdapter = new ConversationAdapter(emConversationList);
+//            mRecyclerView.setAdapter(mConversationAdapter);
+//        } else {
+//            mConversationAdapter.notifyDataSetChanged();
+//        }
 
+        // 不知道是否是环信后台的问题 正常逻辑 上面的写法 后来运行的时候发现列表显示不出来。
+        // 无奈 只有这样写了
+        mConversationAdapter = new ConversationAdapter(emConversationList);
+        mRecyclerView.setAdapter(mConversationAdapter);
     }
 
     @OnClick(R.id.fab)

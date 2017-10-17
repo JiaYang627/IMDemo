@@ -6,12 +6,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.ashokvarma.bottomnavigation.BadgeItem;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.hyphenate.chat.EMClient;
+import com.hyphenate.chat.EMMessage;
 import com.jiayang.imdemo.R;
 import com.jiayang.imdemo.m.component.ApiComponent;
 import com.jiayang.imdemo.p.activity.MainActivityPst;
@@ -20,6 +24,10 @@ import com.jiayang.imdemo.utils.ToastUtils;
 import com.jiayang.imdemo.v.base.BaseActivity;
 import com.jiayang.imdemo.v.base.BaseFragment;
 import com.jiayang.imdemo.v.iview.ImainActivityView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +42,7 @@ public class MainActivity extends BaseActivity<MainActivityPst> implements Imain
     BottomNavigationBar mBottomNavigationBar;
 
     private int[] titleIds = {R.string.main_conversation,R.string.main_contact,R.string.main_plugin};
+    private BadgeItem mBadgeItem;
 
     @Override
     protected void inject(ApiComponent apiComponent) {
@@ -52,6 +61,40 @@ public class MainActivity extends BaseActivity<MainActivityPst> implements Imain
         initToolBar();
         initBottomNavigation();
         initFragment();
+
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUnreadCount();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(EMMessage message){
+        updateUnreadCount();
+    }
+
+    public void updateUnreadCount() {
+        //获取所有的未读消息
+        int unreadMsgsCount = EMClient.getInstance().chatManager().getUnreadMsgsCount();
+        if (unreadMsgsCount>99){
+            mBadgeItem.setText("99+");
+            mBadgeItem.show(true);
+        }else if (unreadMsgsCount>0){
+            mBadgeItem.setText(unreadMsgsCount+"");
+            mBadgeItem.show(true);
+        }else{
+            mBadgeItem.hide(true);
+        }
+
     }
 
     private void initToolBar() {
@@ -65,6 +108,16 @@ public class MainActivity extends BaseActivity<MainActivityPst> implements Imain
         BottomNavigationItem conversationItem = new BottomNavigationItem(R.mipmap.conversation_selected_2, getString(R.string.main_conversation));
         BottomNavigationItem contactItem = new BottomNavigationItem(R.mipmap.contact_selected_2, getString(R.string.main_contact));
         BottomNavigationItem pluginItem = new BottomNavigationItem(R.mipmap.plugin_selected_2, getString(R.string.main_plugin));
+
+
+        mBadgeItem = new BadgeItem();
+        mBadgeItem.setGravity(Gravity.RIGHT);
+        mBadgeItem.setTextColor("#ffffff");
+        mBadgeItem.setBackgroundColor("#ff0000");
+        mBadgeItem.setText("5");
+        mBadgeItem.show();
+
+        conversationItem.setBadgeItem(mBadgeItem);
 
 
         mBottomNavigationBar.addItem(conversationItem);
