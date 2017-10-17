@@ -11,7 +11,7 @@ import java.util.List;
 public interface IcontactFragmentView extends IBaseView {
     void fillData(List<String> contactsList);
 
-    void upDateContacts(boolean isSuccess, String msg);
+    void upDateContacts(boolean isSuccess, String msg, List<String> contactsList);
 
     void delectContanct(boolean isSuccess, String msg);
 }

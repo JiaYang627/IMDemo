@@ -9,19 +9,26 @@ import android.widget.TextView;
 import com.jiayang.imdemo.R;
 import com.jiayang.imdemo.utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static android.R.attr.data;
 
 /**
  * Created by 张 奎 on 2017-10-09 10:55.
  */
 
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> implements IContactAdapter {
-    private List<String> data;
+    private List<String> mData = new ArrayList<>();
 
-    public ContactAdapter(List<String> data) {
-        this.data = data;
+    public ContactAdapter() {
     }
 
+    public void setData(List<String> data) {
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact_adapter, parent, false);
@@ -31,7 +38,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public void onBindViewHolder(ContactViewHolder holder, final int position) {
-        final String contact = data.get(position);
+        final String contact = mData.get(position);
         holder.mTvUsername.setText(contact);
         String initial = StringUtils.getInitial(contact);
         holder.mTvSection.setText(initial);
@@ -61,7 +68,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             holder.mTvSection.setVisibility(View.VISIBLE);
         } else {
             // 得到上一个条目的首字母
-            String preContact = data.get(position - 1);
+            String preContact = mData.get(position - 1);
             String preInitial = StringUtils.getInitial(preContact);
             if (preInitial.equals(initial)) {
                 holder.mTvSection.setVisibility(View.GONE);
@@ -73,12 +80,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     @Override
     public int getItemCount() {
-        return data == null ? 0 : data.size();
+        return mData == null ? 0 : mData.size();
     }
 
     @Override
     public List<String> getData() {
-        return data;
+        return mData;
 
     }
 

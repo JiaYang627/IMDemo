@@ -43,8 +43,8 @@ public class SplashActivity extends BaseActivity<SplashActivityPst> implements I
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStatusBar();
-        // 判断是否已经登录
-        mPresenter.checkedLogin();
+//        // 判断是否已经登录
+//        mPresenter.checkedLogin();
     }
 
     @Override

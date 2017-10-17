@@ -53,6 +53,10 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
         mContactLayout.setSwipeRefreshOnRefresh(this);
 
         EventBus.getDefault().register(this);
+        if (mContactAdapter == null) {
+            mContactAdapter = new ContactAdapter();
+        }
+        mContactLayout.setAdapter(mContactAdapter);
         return view;
     }
 
@@ -70,19 +74,17 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
 
     @Override
     public void fillData(List<String> contactsList) {
-        if (mContactAdapter == null) {
-            mContactAdapter = new ContactAdapter(contactsList);
-        }
-        mContactLayout.setAdapter(mContactAdapter);
+        mContactAdapter.setData(contactsList);
+
         mContactAdapter.setOnItemLongClickListener(this);
     }
 
     @Override
-    public void upDateContacts(boolean isSuccess, String msg) {
+    public void upDateContacts(boolean isSuccess, String msg, List<String> contactsList) {
 
         if (isSuccess) {
             if (mContactAdapter != null) {
-                mContactAdapter.notifyDataSetChanged();
+                mContactAdapter.setData(contactsList);
             }
         } else {
             ToastUtils.initToast(msg);
@@ -106,7 +108,8 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
     }
 
     /**
-     *  Item长按回调
+     * Item长按回调
+     *
      * @param contact
      * @param position
      */
@@ -122,7 +125,8 @@ public class ContactFragment extends BaseFragment<ContactFragmentPst> implements
     }
 
     /**
-     *  Item点击回调
+     * Item点击回调
+     *
      * @param contact
      * @param position
      */

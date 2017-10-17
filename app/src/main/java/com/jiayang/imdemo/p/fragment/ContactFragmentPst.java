@@ -75,7 +75,7 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
                     ThreadUtils.runOnMainThread(new Runnable() {
                         @Override
                         public void run() {
-                            mView.upDateContacts(true, null);
+                            mView.upDateContacts(true, null ,contactsList);
                         }
                     });
 
@@ -86,7 +86,7 @@ public class ContactFragmentPst extends BasePresenter<IcontactFragmentView> {
                     ThreadUtils.runOnMainThread(new Runnable() {
                         @Override
                         public void run() {
-                            mView.upDateContacts(false, e.getMessage());
+                            mView.upDateContacts(false, e.getMessage(), contactsList);
                         }
                     });
                 }

@@ -23,6 +23,12 @@ public class SplashActivityPst extends BasePresenter<IsplashActivityView> {
         mIMService = imService;
     }
 
+    @Override
+    public void onTakeView() {
+        super.onTakeView();
+        checkedLogin();
+    }
+
     public void checkedLogin() {
 
         // isLoggedInBefore 之前是否登录  isConnected 是否已经连接上
