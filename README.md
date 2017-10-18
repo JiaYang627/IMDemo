@@ -22,7 +22,7 @@
 > 聊天UI图(另外一部手机就不录屏了)
 
 
-![IMDemoUI-ONE](http://a2.qpic.cn/psb?/V14YlNrL2eQEkW/QNHrnSQgDvhgiHzR2qJD05Cwsm4DrKmZPAPxOkzgFVk!/c/dDQAAAAAAAAA&bo=GgKzAwAAAAACB4s!&rf=viewer_4)
+![IMDemoUI-ONE](http://a2.qpic.cn/psb?/V14YlNrL2eQEkW/QNHrnSQgDvhgiHzR2qJD05Cwsm4DrKmZPAPxOkzgFVk!/b/dDQAAAAAAAAA&bo=GgKzAwAAAAACY.8!&rf=viewer_4)
 
 ***
 
